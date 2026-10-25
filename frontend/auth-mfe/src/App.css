@@ -1,0 +1,648 @@
+
+/* =========================================
+   1. GLOBAL STYLES
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #171936;
+  background: #f8f8ff;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================================
+   2. MAIN PAGE
+   ========================================= */
+
+.auth-page {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background:
+    radial-gradient(
+      ellipse at 10% 10%,
+      #e8dcff 0,
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 90% 85%,
+      #dce8ff 0,
+      transparent 38%
+    ),
+    #f8f8ff;
+}
+
+/* =========================================
+   3. MAIN AUTHENTICATION CARD
+   ========================================= */
+
+.auth-card {
+  width: min(1080px, 100%);
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 25px 70px rgba(47, 38, 120, 0.13);
+}
+
+/* =========================================
+   4. LEFT BRANDING PANEL
+   ========================================= */
+
+.brand-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 36px;
+  color: #fff;
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      #7156ff 0,
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      #242079 0%,
+      #29228e 58%,
+      #4234d5 100%
+    );
+}
+
+.brand-panel::after {
+  position: absolute;
+  right: -100px;
+  bottom: -160px;
+  width: 350px;
+  height: 270px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7254ff, #2879f5);
+  content: '';
+  opacity: 0.5;
+}
+
+.brand,
+.mobile-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+}
+
+.brand {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-decoration: none;
+}
+
+.brand-icon,
+.form-mark {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: linear-gradient(140deg, #9573ff, #5938f5);
+  color: #fff;
+  font-size: 27px;
+  font-weight: 800;
+  box-shadow: 0 8px 24px #5e47f34a;
+}
+
+.brand-copy {
+  position: relative;
+  z-index: 1;
+  margin-top: 58px;
+}
+
+.eyebrow {
+  color: #c4bcff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.brand-copy h2 {
+  max-width: 400px;
+  margin: 18px 0 14px;
+  font-size: clamp(34px, 3.5vw, 46px);
+  line-height: 1.15;
+  letter-spacing: -2px;
+}
+
+.brand-copy h2 span {
+  display: block;
+  color: #a99aff;
+}
+
+.brand-copy p {
+  max-width: 340px;
+  margin: 0;
+  color: #d6d5ff;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* =========================================
+   5. DECORATIVE ORBIT ILLUSTRATION
+   ========================================= */
+
+.orbit-art {
+  position: relative;
+  width: min(280px, 100%);
+  height: 180px;
+  flex-shrink: 0;
+  margin: 20px auto 0;
+}
+
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid #8171ff9c;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.orbit-one {
+  width: 260px;
+  height: 90px;
+  transform: translate(-50%, -50%) rotate(-17deg);
+}
+
+.orbit-two {
+  width: 235px;
+  height: 130px;
+  transform: translate(-50%, -50%) rotate(24deg);
+}
+
+.orbit-three {
+  width: 165px;
+  height: 165px;
+  border-color: #7165f15c;
+}
+
+.orbit-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border: 1px solid #ffffff70;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #ad86ff, #6044f6);
+  box-shadow: 0 0 35px #8e6cff8a;
+  font-size: 34px;
+  font-weight: 800;
+  transform: translate(-50%, -50%);
+}
+
+.orbit-tile {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #ffffff47;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #6351e9, #396be8);
+  box-shadow: 0 10px 24px #16145c55;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.tile-one {
+  top: 8px;
+  left: 10px;
+}
+
+.tile-two {
+  top: 0;
+  right: 8px;
+}
+
+.tile-three {
+  bottom: 0;
+  left: 4px;
+}
+
+.tile-four {
+  right: 0;
+  bottom: 4px;
+}
+
+.brand-footer {
+  position: relative;
+  z-index: 1;
+  margin: auto 0 0;
+  padding-top: 14px;
+  color: #c9c6ff;
+  font-size: 11px;
+}
+
+/* =========================================
+   6. RIGHT FORM PANEL
+   ========================================= */
+
+.form-panel {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  padding: 32px 44px;
+  background: #fff;
+}
+
+.form-content {
+  width: 100%;
+  max-width: 410px;
+  min-width: 0;
+}
+
+.mobile-brand {
+  display: none;
+  margin-bottom: 28px;
+  font-size: 20px;
+}
+
+.form-heading {
+  margin-bottom: 28px;
+}
+
+.form-mark {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  font-size: 29px;
+}
+
+.form-heading h1 {
+  margin: 0 0 8px;
+  color: #10101a;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1.3px;
+}
+
+.form-heading p {
+  margin: 0;
+  color: #777c98;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* =========================================
+   7. FORM FIELDS AND VALIDATION
+   ========================================= */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  color: #282a46;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.field input {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #dfe1ed;
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+  color: #222441;
+  font-size: 13px;
+  transition: border-color 180ms, box-shadow 180ms;
+}
+
+.field input::placeholder {
+  color: #a1a4b8;
+}
+
+.field input:focus {
+  border-color: #7860fa;
+  box-shadow: 0 0 0 4px #7860fa18;
+}
+
+/* Validation messages: apply on every screen size. */
+.field-error {
+  margin: 0;
+  color: #dc2626;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.password-wrap {
+  position: relative;
+}
+
+.password-wrap input {
+  padding-right: 64px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  padding: 6px;
+  border: none;
+  background: transparent;
+  color: #6549f5;
+  font-size: 12px;
+  font-weight: 600;
+  transform: translateY(-50%);
+}
+
+/* =========================================
+   8. FORM OPTIONS
+   ========================================= */
+
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: -2px;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #696e8d;
+  font-size: 12px;
+}
+
+.remember input {
+  width: 15px;
+  height: 15px;
+  accent-color: #6848f5;
+}
+
+.text-button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #6549f5;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.text-button:hover {
+  color: #4330c6;
+  text-decoration: underline;
+}
+
+/* =========================================
+   9. PRIMARY SIGN-IN BUTTON
+   ========================================= */
+
+.primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 2px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(100deg, #6d43f5, #3984f5);
+  box-shadow: 0 8px 18px #674bf52b;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 180ms, box-shadow 180ms;
+}
+
+.primary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px #674bf542;
+}
+
+.primary-button span {
+  font-size: 19px;
+}
+
+/* =========================================
+   10. SEPARATOR AND ACCOUNT SWITCH
+   ========================================= */
+
+.separator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.separator span {
+  height: 1px;
+  flex: 1;
+  background: #e8e9f1;
+}
+
+.separator p {
+  margin: 0;
+  color: #9699af;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.switch-copy {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  color: #777c98;
+  font-size: 12px;
+}
+
+/* =========================================
+   11. LEGAL FOOTER
+   ========================================= */
+
+.legal {
+  margin: 25px 0 0;
+  color: #999db1;
+  font-size: 10px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.legal a {
+  color: #6750ed;
+  text-decoration: none;
+}
+
+.legal a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   12. TABLET AND MOBILE
+   ========================================= */
+
+@media (max-width: 800px) {
+  .auth-page {
+    padding: 16px;
+  }
+
+  .auth-card {
+    width: min(520px, 100%);
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+  }
+
+  .brand-panel {
+    display: none;
+  }
+
+  .form-panel {
+    padding: 30px 24px;
+  }
+
+  .mobile-brand {
+    display: flex;
+  }
+
+  .form-heading h1 {
+    font-size: 29px;
+  }
+}
+
+/* =========================================
+   13. SMALL MOBILE SCREENS
+   ========================================= */
+
+@media (max-width: 380px) {
+  .auth-page {
+    padding: 10px;
+  }
+
+  .form-panel {
+    padding: 24px 18px;
+  }
+
+  .form-options {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+/* =========================================
+   14. SHORT DESKTOP SCREENS
+   ========================================= */
+
+@media (min-width: 801px) and (max-height: 800px) {
+  .auth-page {
+    padding: 12px;
+  }
+
+  .brand-panel {
+    padding: 28px;
+  }
+
+  .brand-copy {
+    margin-top: 32px;
+  }
+
+  .orbit-art {
+    height: 140px;
+    margin-top: 10px;
+  }
+
+  .orbit-three {
+    width: 130px;
+    height: 130px;
+  }
+
+  .orbit-one {
+    height: 72px;
+  }
+
+  .orbit-two {
+    height: 105px;
+  }
+
+  .form-panel {
+    padding: 22px 36px;
+  }
+
+  .form-heading {
+    margin-bottom: 20px;
+  }
+
+  .form-mark {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 14px;
+    font-size: 24px;
+  }
+
+  .auth-form {
+    gap: 14px;
+  }
+
+  .field input {
+    height: 44px;
+  }
+
+  .separator {
+    margin: 16px 0;
+  }
+
+  .legal {
+    margin-top: 18px;
+  }
+}

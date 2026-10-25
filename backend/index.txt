@@ -1,0 +1,64 @@
+200 succesfull
+201 new project
+400 invalid request
+401 unauthorized
+403  forbidden user lacks permission
+404 not found project does not exist
+429 to many requests rate limit exceeded
+500 internal server unexpected backend failure
+
+
+rest api stands for represental state tranfer is an archetectural style for designing apis around resources using stanard http methods
+
+an end point is a url path with an http method that the backend handles
+
+json is a javascript object notation is a text format use to exchange strctured data between applications
+
+express js is a web frame work used for node js that simplifies building http servers , apis , routes and middleware
+
+npx tsc --init
+
+
+Understand each part
+Part	English	Hinglish
+npx	Runs a package executable	Package ka command run karta hai
+tsc	TypeScript compiler	TypeScript ko check aur compile karta hai
+--init	Creates a configuration file	Nayi config file banata hai
+
+a server is a program that listens for client requests process them an send responses
+
+
+a local host is a host name that refers to the my own computers
+
+middle ware is a function that runs during the http request reponse cycle it can inspect modify the requests send a response or pass control to the next middle ware 
+
+
+tsx → Runs TypeScript code.
+tsc → Checks TypeScript types and can compile TypeScript into JavaScript.
+
+JWt  typically looks like
+
+Header.payload.signature
+
+heaer specifies token  type and sigining algorithum
+
+payload contain claims such as user ID and expiry
+
+signature helps detect tampering and verify the issuer
+
+
+jwt secret is a private cryptographic key used by the backend to sign in verify jwt when using a symentric signing algorithum such as HS256
+
+
+ AWS service	Purpose in AgencyOS
+IAM	            Permissions for developers, deployment pipelines and AWS services.
+VPC	            Private network where backend resources communicate.
+ECR	            Stores backend Docker images.
+ECS + Fargate	Runs the backend containers without managing servers.
+Application Load Balancer (ALB)	Routes incoming API traffic to healthy backend tasks.
+S3 + CloudFront	Hosts the frontend build and serves it over HTTPS.
+Secrets Manager	Stores production secrets, such as JWT and database credentials.
+CloudWatch	Stores application logs and metrics, and supports alarms.
+Certificate Manager	Provides TLS certificates for custom HTTPS domains.
+Route 53	Routes your custom domain to the deployed application.
+

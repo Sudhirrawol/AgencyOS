@@ -1,0 +1,2 @@
+axios instance is a resuable  axios client with predefined configurations such as baseUrl , deafult headers and interceptors
+
