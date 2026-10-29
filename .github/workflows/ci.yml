@@ -26,7 +26,7 @@ jobs:
              run: |
                node --version
                npm --version   
-               
+
            - name: Install Auth Service dependencies
              working-directory: backend/auth-service
              run: npm ci    
@@ -35,6 +35,14 @@ jobs:
              working-directory: backend/auth-service
              run: npm run build  
 
+           - name: Install React Shell dependencies
+             working-directory: frontend/shell
+             run: npm ci
+
+           - name: Build React Shell
+             working-directory: frontend/shell
+             run: npm run build
+  
            - name: Show working directory
              run: pwd
 
