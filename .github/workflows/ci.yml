@@ -1,0 +1,33 @@
+name : AgencyOS CI
+
+on:
+   push:
+        branches:
+          - main
+
+
+   pull_request:
+        branches:
+          - main      
+
+jobs:
+   verify:
+        name: Verify AgencyOS
+        runs-on: windows-latest
+        steps:
+           - name: Checkout repository
+             uses: actions/checkout@v4
+
+           - name: Show working directory
+             run: pwd
+
+           - name: List project files
+             run: dir  
+           - name: Verify backend
+             run: dir backend/auth-service
+           - name: Verify Shell
+             run: dir frontend/shell
+           - name: Verify Auth MFE
+             run: dir frontend/auth-mfe
+           - name: Finish
+             run: echo "AgencyOS CI verification completed"
