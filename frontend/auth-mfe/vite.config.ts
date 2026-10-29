@@ -8,9 +8,13 @@ export default defineConfig({
     name: "auth_mfe",
     filename: "remoteEntry.js",
     exposes: {
-      './AuthApp': "./src/App.tsx",
+      './AuthApp': './src/AuthApp.tsx',
     },
-    shared: ["react", "react-dom"]
+    shared: {
+  react: { requiredVersion: '^18.3.1' },
+  'react-dom': { requiredVersion: '^18.3.1' },
+  'react-redux': { requiredVersion: '^9.3.0' },
+}
   })],
   server: {
     port: 5001

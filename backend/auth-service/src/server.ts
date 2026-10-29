@@ -9,11 +9,11 @@ import { errorHandler } from './middleware/error.middleware.js';
 
 const app = express();
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173","http://localhost:5001",'http://localhost:5000',],
     credentials: true,
 }));
 

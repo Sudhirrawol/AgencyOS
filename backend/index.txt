@@ -62,3 +62,38 @@ CloudWatch	Stores application logs and metrics, and supports alarms.
 Certificate Manager	Provides TLS certificates for custom HTTPS domains.
 Route 53	Routes your custom domain to the deployed application.
 
+
+
+We won't build every technology independently. Each one will solve a real problem in our product.
+AgencyOS feature	Technologies we will learn
+User accounts and sessions	Express, JWT, cookies, MongoDB, Redis
+Projects, tasks and comments	REST APIs, MongoDB indexes, validation, authorization
+Live task updates and notifications	WebSockets, event delivery, Redis where needed
+Background notifications and audit events	Kafka or another queue when asynchronous processing is justified
+Frontend and backend deployment	Docker, Nginx, AWS, HTTPS
+Automated releases	GitHub Actions, ECR, ECS, health checks, rollback
+Scaling and orchestration	Load balancing, Kubernetes, autoscaling
+Production diagnosis	CloudWatch, logs, metrics, tracing, load tests
+
+
+Area	What you need to learn and practise
+Application engineering	React, TypeScript, Node.js, Express, API contracts, validation and authentication
+Database engineering	MongoDB indexes, query performance, backups, recovery and connection pooling
+Containers	Docker images, networking, volumes, health checks and resource limits
+Cloud infrastructure	AWS IAM, VPC, security groups, compute, load balancing and secrets
+CI/CD	Automated testing, image versioning, deployment approvals, health checks and rollback
+Troubleshooting	Logs, metrics, traces, HTTP errors, latency, crashes and dependency failures
+Distributed systems	Redis, Kafka, WebSockets, retries, idempotency and service communication
+Orchestration	Kubernetes when the deployment complexity justifies it
+Reliability	Monitoring, alerts, incident response, recovery objectives and post-incident reviews
+
+Area	What you need to learn and practise
+Application engineering	React, TypeScript, Node.js, Express, API contracts, validation and authentication
+Database engineering	MongoDB indexes, query performance, backups, recovery and connection pooling
+Containers	Docker images, networking, volumes, health checks and resource limits
+Cloud infrastructure	AWS IAM, VPC, security groups, compute, load balancing and secrets
+CI/CD	Automated testing, image versioning, deployment approvals, health checks and rollback
+Troubleshooting	Logs, metrics, traces, HTTP errors, latency, crashes and dependency failures
+Distributed systems	Redis, Kafka, WebSockets, retries, idempotency and service communication
+Orchestration	Kubernetes when the deployment complexity justifies it
+Reliability	Monitoring, alerts, incident response, recovery objectives and post-incident reviews

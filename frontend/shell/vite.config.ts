@@ -9,7 +9,11 @@ export default defineConfig({
     remotes: {
       auth_mfe: 'http://localhost:5001/assets/remoteEntry.js'
     },
-    shared: ['react', 'react-dom'],
+    shared: {
+      react: { requiredVersion: '^18.3.1' },
+      'react-dom': { requiredVersion: '^18.3.1' },
+      'react-redux': { requiredVersion: '^9.3.0' },
+    }
   })],
   server: {
     port: 5000,

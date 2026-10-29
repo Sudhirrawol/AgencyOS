@@ -1,1 +1,3 @@
 .gitignore tells git which files and folders it should not track
+
+docker run -d --name agencyos-auth -p 3000:3000 --env-file .env agencyos-auth-service
