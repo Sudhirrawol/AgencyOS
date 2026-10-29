@@ -67,14 +67,22 @@ jobs:
              run: echo "AgencyOS CI verification completed"
 
 
+  
    docker-build:
-
-        name: Build Auth Service Docker Image
+        name: Build AgencyOS Docker Images
         needs: verify
         runs-on: ubuntu-latest
 
         steps:
            - name: Checkout repository
              uses: actions/checkout@v4
+
+
            - name: Build Auth Service image
              run: docker build -t agencyos-auth-service:ci ./backend/auth-service
+
+           - name: Build React Shell image
+             run: docker build -t agencyos-shell:ci ./frontend/shell
+
+           - name: Build Auth MFE image
+             run: docker build -t agencyos-auth-mfe:ci ./frontend/auth-mfe
