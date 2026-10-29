@@ -42,6 +42,15 @@ jobs:
            - name: Build React Shell
              working-directory: frontend/shell
              run: npm run build
+
+           - name: Install Auth MFE dependencies
+             working-directory: frontend/auth-mfe
+             run: npm ci
+
+           - name: Build Auth MFE
+             working-directory: frontend/auth-mfe
+             run: npm run build
+
   
            - name: Show working directory
              run: pwd
@@ -56,3 +65,16 @@ jobs:
              run: dir frontend/auth-mfe
            - name: Finish
              run: echo "AgencyOS CI verification completed"
+
+
+   docker-build:
+
+        name: Build Auth Service Docker Image
+        needs: verify
+        runs-on: ubuntu-latest
+
+        steps:
+           - name: Checkout repository
+             uses: actions/checkout@v4
+           - name: Build Auth Service image
+             run: docker build -t agencyos-auth-service:ci ./backend/auth-service
