@@ -1,57 +1,63 @@
-
-import { useState } from 'react'
-import type { FormEvent } from 'react'
-import './App.css'
-import { useSelector } from 'react-redux'
-import type { RootState } from './app/store';
-import { useDispatch } from 'react-redux';
-import type { AppDispatch } from './app/store';
-import { loginSuccess } from './features/auth/authSlice'
-import { useLoginMutation, useRegisterMutation, useLazyProfileQuery } from './services/authApi';
+import { useState } from "react";
+import type { FormEvent } from "react";
+import "./App.css";
+import { useSelector } from "react-redux";
+import type { RootState } from "./app/store";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "./app/store";
+import { loginSuccess } from "./features/auth/authSlice";
+import { eventBus } from "../../shared/event-bus/eventBus";
+import {
+  useLoginMutation,
+  useRegisterMutation,
+  useLazyProfileQuery,
+} from "./services/authApi";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true)
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [isLogin, setIsLogin] = useState(true);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [apiError, setApiError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [apiError, setApiError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const dispatch = useDispatch<AppDispatch>();
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
   const [login, { isLoading: isLoginLoading }] = useLoginMutation();
   const [register, { isLoading: isRegisterLoading }] = useRegisterMutation();
   const [getProfile] = useLazyProfileQuery();
-  console.log('Authenticated', isAuthenticated);
+  console.log("Authenticated", isAuthenticated);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setEmailError('')
-    setPasswordError('')
+    e.preventDefault();
+    setEmailError("");
+    setPasswordError("");
     setApiError("");
     setSuccessMessage("");
 
     if (!isLogin && !name.trim()) {
-      setApiError('Full name is required');
+      setApiError("Full name is required");
       return;
     }
 
-    if (email.trim() === '') {
-      setEmailError('Email is required');
-      return
+    if (email.trim() === "") {
+      setEmailError("Email is required");
+      return;
     }
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailPattern.test(email.trim())) {
-      setEmailError('Please enter a valid email');
+      setEmailError("Please enter a valid email");
       return;
     }
     if (password.length < 8) {
-      setPasswordError('Password must be at least 8 characters')
-      return
+      setPasswordError("Password must be at least 8 characters");
+      return;
     }
     setIsLoading(true);
 
@@ -65,24 +71,29 @@ function App() {
         console.log("Authenticated user :", profile);
 
         dispatch(loginSuccess());
-        setSuccessMessage(response.message || 'Login successful');
+
+        eventBus.emit("auth:login-success");
+
+        console.log("Auth MFE: Login success event emitted");
+
+        setSuccessMessage(response.message || "Login successful");
       } else {
         const response = await register({
           name: name.trim(),
           email: email.trim(),
           password,
         }).unwrap();
-        setSuccessMessage(response.message || 'Registration successful');
+        setSuccessMessage(response.message || "Registration successful");
       }
-
-
     } catch (error: unknown) {
-      console.error('Authentication error:', error);
-      setApiError('Unable to complete the request. Please check your details and try again.');
+      console.error("Authentication error:", error);
+      setApiError(
+        "Unable to complete the request. Please check your details and try again.",
+      );
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return (
     <main className="auth-page">
@@ -100,8 +111,8 @@ function App() {
               <span> great.</span>
             </h2>
             <p>
-              Your workspace, organized and ready to grow.
-              Everything you need, all in one place.
+              Your workspace, organized and ready to grow. Everything you need,
+              all in one place.
             </p>
           </div>
 
@@ -131,11 +142,11 @@ function App() {
 
             <div className="form-heading">
               <div className="form-mark">A</div>
-              <h1>{isLogin ? 'Welcome back' : 'Create your account'}</h1>
+              <h1>{isLogin ? "Welcome back" : "Create your account"}</h1>
               <p>
                 {isLogin
-                  ? 'Sign in to your AgencyOS account'
-                  : 'Get started with your free account'}
+                  ? "Sign in to your AgencyOS account"
+                  : "Get started with your free account"}
               </p>
             </div>
 
@@ -174,13 +185,11 @@ function App() {
                 <div className="password-wrap">
                   <input
                     id="password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    autoComplete={
-                      isLogin ? 'current-password' : 'new-password'
-                    }
+                    autoComplete={isLogin ? "current-password" : "new-password"}
                     required
                     minLength={8}
                   />
@@ -188,12 +197,16 @@ function App() {
                     className="password-toggle"
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
                   >
-                    {showPassword ? 'Hide' : 'Show'}
+                    {showPassword ? "Hide" : "Show"}
                   </button>
                 </div>
-                {passwordError && <p className="field-error">{passwordError}</p>}
+                {passwordError && (
+                  <p className="field-error">{passwordError}</p>
+                )}
               </div>
 
               {isLogin && (
@@ -205,24 +218,28 @@ function App() {
                   <button
                     className="text-button"
                     type="button"
-                    onClick={() =>
-                      alert('Password reset will be added next.')
-                    }
+                    onClick={() => alert("Password reset will be added next.")}
                   >
                     Forgot password?
                   </button>
                 </div>
               )}
-              {apiError && (<p className='field-error' role="alert">{apiError}</p>)}
-              {successMessage && (
-                <p role="status">{successMessage}</p>
+              {apiError && (
+                <p className="field-error" role="alert">
+                  {apiError}
+                </p>
               )}
-              <button className="primary-button" type="submit" disabled={isLoginLoading || isRegisterLoading}>
+              {successMessage && <p role="status">{successMessage}</p>}
+              <button
+                className="primary-button"
+                type="submit"
+                disabled={isLoginLoading || isRegisterLoading}
+              >
                 {isLoading
-                  ? 'Please wait...'
+                  ? "Please wait..."
                   : isLogin
-                    ? 'Sign in'
-                    : 'Create account'}
+                    ? "Sign in"
+                    : "Create account"}
                 <span aria-hidden="true">→</span>
               </button>
             </form>
@@ -234,31 +251,29 @@ function App() {
             </div>
 
             <p className="switch-copy">
-              {isLogin
-                ? "Don't have an account?"
-                : 'Already have an account?'}
+              {isLogin ? "Don't have an account?" : "Already have an account?"}
               <button
                 type="button"
                 className="text-button"
                 onClick={() => {
-                  setIsLogin(!isLogin)
-                  setShowPassword(false)
+                  setIsLogin(!isLogin);
+                  setShowPassword(false);
                 }}
               >
-                {isLogin ? 'Create account' : 'Sign in'}
+                {isLogin ? "Create account" : "Sign in"}
               </button>
             </p>
 
             <p className="legal">
-              By continuing, you agree to our
-              {' '}<a href="#terms">Terms of Service</a> and
-              {' '}<a href="#privacy">Privacy Policy</a>.
+              By continuing, you agree to our{" "}
+              <a href="#terms">Terms of Service</a> and{" "}
+              <a href="#privacy">Privacy Policy</a>.
             </p>
           </div>
         </section>
       </section>
     </main>
-  )
+  );
 }
 
-export default App
+export default App;
