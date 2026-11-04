@@ -6,9 +6,12 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import { eventBus } from "auth_mfe/EventBus";
 import Dashboard from "./pages/Dashboard";
+import Settings from "./pages/Settings";
+import DashboardLayout from "./layouts/DashboardLayout";
 
 const AuthApp = lazy(() => import("auth_mfe/AuthApp"));
 
@@ -34,7 +37,12 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<AuthApp />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/settings" element={<Settings />} />
+          </Route>
+        </Route>
       </Routes>
     </Suspense>
   );
