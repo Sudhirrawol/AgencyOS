@@ -4,3 +4,109 @@
 
 #HttpOnly_localhost	FALSE	/api/auth	TRUE	1793678322	refreshToken	4498ba566314a916d9dfcda3a79ac37604db2fc0f172a5fdfce4d5dca003bb2e
 #HttpOnly_localhost	FALSE	/	TRUE	1793074422	accessToken	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWRlNjA1ZWFmZmFjNjljNzNmMzdkZDMiLCJpYXQiOjE3OTMwNzM1MjIsImV4cCI6MTc5MzA3NDQyMn0.UZqFALWuuTIXKYn_QyDLNaGbgLrg3wCurVqKiHnzGe4
+
+
+
+Learning progress tracker
+
+0 / 32 topics
+
+
+
+1. Backend & architecture
+
+0/5
+
+[ ] TypeScript, Node.js, Express internals
+
+[ ] Controllers, services, repositories, middleware
+
+[ ] REST APIs, validation, error handling
+
+[ ] MongoDB relationships, indexes, aggregation, transactions
+
+[ ] Pagination, filtering, sorting
+
+
+2. Security & authentication
+
+0/4
+
+[ ] JWT, refresh tokens, secure cookies
+
+[ ] Authentication, authorization, RBAC
+
+[ ] OWASP security, CORS, CSRF, rate limiting
+
+[ ] Secrets, environment configuration
+
+
+3. Testing & code quality
+
+0/4
+
+[ ] Unit, integration and E2E testing
+
+[ ] Mocking, API testing, test coverage
+
+[ ] ESLint, Prettier, code reviews
+
+[ ] API documentation with OpenAPI
+
+
+4. Real-time & event-driven systems
+
+0/5
+
+[ ] WebSocket fundamentals and Socket.IO
+
+[ ] Kafka producers, consumers, partitions, offsets
+
+[ ] Consumer groups, retries, DLQ, idempotency
+
+[ ] Outbox pattern and event reliability
+
+[ ] Redis caching, pub/sub and scaling
+
+
+5. DevOps & cloud deployment
+
+0/5
+
+[ ] Linux, networking, DNS, HTTPS, NGINX
+
+[ ] Docker, multi-stage builds, Docker Compose
+
+[ ] GitHub Actions CI/CD, artifacts, environments
+
+[ ] AWS IAM, VPC, EC2, ECR, S3
+
+[ ] Secrets, deployment, rollback, backups
+
+
+6. Production operations
+
+0/5
+
+[ ] Kubernetes pods, services, deployments, ingress
+
+[ ] Scaling, load balancing, health checks
+
+[ ] Structured logging, metrics, tracing
+
+[ ] Prometheus, Grafana, OpenTelemetry
+
+[ ] Alerts, load testing, disaster recovery
+
+
+7. Advanced engineering
+
+0/4
+
+[ ] System design and architecture trade-offs
+
+[ ] Performance optimization and security reviews
+
+[ ] AI integration and RAG
+
+[ ] Production troubleshootin

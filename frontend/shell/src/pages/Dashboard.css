@@ -32,47 +32,6 @@
   }
 }
 
-.dashboard-page {
-  padding: 32px;
-}
-
-.dashboard-heading {
-  margin-bottom: 28px;
-}
-
-.dashboard-heading h1 {
-  font-size: 28px;
-  color: #0f172a;
-  margin: 0 0 8px;
-}
-
-.dashboard-heading p {
-  color: #64748b;
-  margin: 0;
-}
-
-.dashboard-stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
-}
-
-@media (max-width: 1200px) {
-  .dashboard-stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 600px) {
-  .dashboard-page {
-    padding: 16px;
-  }
-
-  .dashboard-stats {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* Mobile */
 @media (max-width: 768px) {
   .dashboard-layout {
