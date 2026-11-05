@@ -1,10 +1,16 @@
-import UserClient from "../models/client.model.js";
 import type { Request, Response } from "express";
 import createClientSchema, {
   updateClientSchema,
 } from "../validators/client.validators.js";
 import z from "zod";
 import mongoose from "mongoose";
+import {
+  createNewClient,
+  getAllClients,
+  getClientById,
+  updateClientId,
+  deleteClientById,
+} from "../services/client.service.js";
 
 async function createClient(req: Request, res: Response) {
   try {
@@ -14,13 +20,7 @@ async function createClient(req: Request, res: Response) {
         errors: z.treeifyError(result.error),
       });
     }
-    const { name, email, phone, company } = result.data;
-    const userDetails = await UserClient.create({
-      name,
-      email,
-      phone,
-      company,
-    });
+    const userDetails = await createNewClient(result.data);
     return res.status(201).json({
       message: "user create succesfully",
       userDetails: userDetails,
@@ -35,7 +35,7 @@ async function createClient(req: Request, res: Response) {
 
 export async function getClients(req: Request, res: Response) {
   try {
-    const userDetails = await UserClient.find({});
+    const userDetails = await getAllClients();
     res.status(200).json({
       message: "Clients fetched successfully",
       userDetails,
@@ -50,14 +50,14 @@ export async function getClients(req: Request, res: Response) {
 
 export async function getClientId(req: Request, res: Response) {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
 
-    if (!id || !mongoose.isValidObjectId(id)) {
+    if (typeof id !== "string" || !mongoose.isValidObjectId(id)) {
       return res.status(400).json({
         message: "Invalid client ID",
       });
     }
-    const user = await UserClient.findById(id);
+    const user = await getClientById(id);
     if (!user) {
       return res.status(404).json({ message: "Client does not exist" });
     }
@@ -73,9 +73,9 @@ export async function getClientId(req: Request, res: Response) {
 
 export async function updateClient(req: Request, res: Response) {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
 
-    if (!id || !mongoose.isValidObjectId(id)) {
+    if (typeof id !== "string" || !mongoose.isValidObjectId(id)) {
       return res.status(400).json({
         message: "Invalid client ID",
       });
@@ -86,10 +86,7 @@ export async function updateClient(req: Request, res: Response) {
         errors: z.treeifyError(result.error),
       });
     }
-    const updatedClient = await UserClient.findByIdAndUpdate(id, result.data, {
-      new: true,
-      runValidators: true,
-    });
+    const updatedClient = await updateClientId(id, result.data);
 
     if (!updatedClient) {
       return res.status(404).json({
@@ -110,13 +107,14 @@ export async function updateClient(req: Request, res: Response) {
 
 export async function deleteClient(req: Request, res: Response) {
   try {
-    const { id } = req.params;
-    if (!id || !mongoose.isValidObjectId(id)) {
+    const id = req.params.id;
+
+    if (typeof id !== "string" || !mongoose.isValidObjectId(id)) {
       return res.status(400).json({
         message: "Invalid client ID",
       });
     }
-    const deletedClient = await UserClient.findByIdAndDelete(id);
+    const deletedClient = await deleteClientById(id);
     if (!deletedClient) {
       return res.status(404).json({
         message: "Client not found",
@@ -124,7 +122,7 @@ export async function deleteClient(req: Request, res: Response) {
     }
     return res.status(200).json({
       message: "Client deleted successfully",
-      deleteClient,
+      deletedClient,
     });
   } catch (error) {
     console.log(error);
