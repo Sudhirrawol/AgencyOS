@@ -41,8 +41,37 @@ export async function getProjects(req: Request, res: Response) {
   try {
     const page = Number(req.query.page ?? 1);
 
+    const search = req.query.search;
+
+    const status = req.query.status;
+
+    const sort = req.query.sort ?? "newest";
+
     const limit = Number(req.query.limit ?? 10);
 
+    const allowedStatuses = ["planned", "in-progress", "completed"];
+    const allowedSorts = ["newest", "oldest", "name-asc", "name-desc"];
+
+    // English: Validate all query parameters.
+    // Hinglish: Saare query parameters ek saath check karo.
+    const isInvalid =
+      !Number.isInteger(page) ||
+      page < 1 ||
+      !Number.isInteger(limit) ||
+      limit < 1 ||
+      limit > 100 ||
+      (search !== undefined &&
+        (typeof search !== "string" || search.length > 100)) ||
+      (status !== undefined &&
+        (typeof status !== "string" || !allowedStatuses.includes(status))) ||
+      typeof sort !== "string" ||
+      !allowedSorts.includes(sort);
+
+    if (isInvalid) {
+      return res.status(400).json({
+        message: "Invalid query parameters",
+      });
+    }
     if (
       !Number.isInteger(page) ||
       !Number.isInteger(limit) ||
@@ -55,7 +84,15 @@ export async function getProjects(req: Request, res: Response) {
       });
     }
 
-    const result = await getPaginatedProjects(page, limit);
+    // English: Pass page and limit inside one object.
+    // Hinglish: Dono values ek object mein service ko bhejo.
+    const result = await getPaginatedProjects({
+      page,
+      limit,
+      search,
+      status,
+      sort,
+    });
 
     return res.status(200).json({
       message: "Projects fetched succesfully",
