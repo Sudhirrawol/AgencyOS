@@ -24,3 +24,16 @@ declare module "auth_mfe/EventBus" {
     off(eventName: string, callback: () => void): void;
   };
 }
+
+declare module "project_mfe/ProjectApp";
+{
+  import type { ComponentType } from "react";
+  const ProjectApp: ComponentType;
+  export default ProjectApp;
+}
+
+declare module "client_mfe/ClientApp" {
+  import type { Component } from "react";
+  const ClientApp: ComponentType;
+  export default ClientApp;
+}

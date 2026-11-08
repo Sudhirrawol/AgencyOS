@@ -1,0 +1,27 @@
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import federation from "@originjs/vite-plugin-federation";
+
+export default defineConfig({
+  plugins: [
+    react(),
+    federation({
+      name: "client_mfe",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./ClientApp": "./src/ClientApp.tsx",
+      },
+      shared: {
+        react: { requiredVersion: "18.3.1" },
+        "react-dom": { requiredVersion: "^18.3.1" },
+      },
+    }),
+  ],
+  server: {
+    port: 5003,
+  },
+  preview: {
+    port: 5002,
+  },
+  build: { target: "esnext" },
+});

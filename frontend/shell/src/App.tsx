@@ -12,8 +12,9 @@ import { eventBus } from "auth_mfe/EventBus";
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 import DashboardLayout from "./layouts/DashboardLayout";
-
+const ProjectApp = lazy(() => import("project_mfe/ProjectApp"));
 const AuthApp = lazy(() => import("auth_mfe/AuthApp"));
+const ClientApp = lazy(() => import("client_mfe/ClientApp"));
 
 function AppRoutes() {
   const navigate = useNavigate();
@@ -40,6 +41,8 @@ function AppRoutes() {
         <Route element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/projects" element={<ProjectApp />} />
+            <Route path="/clients" element={<ClientApp />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
         </Route>

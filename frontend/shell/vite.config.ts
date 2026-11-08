@@ -10,6 +10,8 @@ export default defineConfig({
       name: "shell",
       remotes: {
         auth_mfe: "http://localhost:5001/assets/remoteEntry.js",
+        project_mfe: "http://localhost:5002/assets/remoteEntry.js",
+        client_mfe: "http://localhost:5003/assets/remoteEntry.js",
       },
       shared: {
         react: { requiredVersion: "^18.3.1" },
