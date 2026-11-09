@@ -38,7 +38,13 @@ export const projectApi = createApi({
     getProjects: builder.query<ProjectResponse, ProjectQueryParams>({
       query: ({ search, status, sort, page, limit }) => ({
         url: "projects",
-        params: { search, status, sort, page, limit },
+        params: {
+          ...(search?.trim() ? { search: search.trim() } : {}),
+          ...(status ? { status } : {}),
+          ...(sort ? { sort } : {}),
+          page,
+          limit,
+        },
       }),
       providesTags: ["Projects"],
     }),

@@ -12,8 +12,9 @@ export default defineConfig({
         "./ProjectApp": "./src/ProjectApp.tsx",
       },
       shared: {
-        react: { requiredVersion: "18.3.1" },
+        react: { requiredVersion: "^18.3.1" },
         "react-dom": { requiredVersion: "^18.3.1" },
+        "react-redux": { requiredVersion: "^9.3.0" },
       },
     }),
   ],

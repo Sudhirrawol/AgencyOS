@@ -12,8 +12,9 @@ export default defineConfig({
         "./ClientApp": "./src/ClientApp.tsx",
       },
       shared: {
-        react: { requiredVersion: "18.3.1" },
+        react: { requiredVersion: "^18.3.1" },
         "react-dom": { requiredVersion: "^18.3.1" },
+        "react-redux": { requiredVersion: "^9.3.0" },
       },
     }),
   ],
@@ -22,6 +23,7 @@ export default defineConfig({
   },
   preview: {
     port: 5002,
+    strictPort: true,
   },
   build: { target: "esnext" },
 });

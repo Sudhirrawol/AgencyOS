@@ -50,40 +50,64 @@ export default function ClientForm() {
     <form onSubmit={handleSubmit}>
       <h2>Create Client</h2>
 
-      <input
-        placeholder="Client name"
-        value={formData.name}
-        onChange={(e) => handleChange("name", e.target.value)}
-        required
-      />
+      <div className="ao-form-grid">
+        <label className="ao-field">
+          <span className="ao-label">Client Name</span>
+          <input
+            className="ao-input"
+            placeholder="Enter client name"
+            value={formData.name}
+            onChange={(e) => handleChange("name", e.target.value)}
+            required
+          />
+        </label>
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={(e) => handleChange("email", e.target.value)}
-        required
-      />
+        <label className="ao-field">
+          <span className="ao-label">Email Address</span>
+          <input
+            className="ao-input"
+            type="email"
+            placeholder="client@example.com"
+            value={formData.email}
+            onChange={(e) => handleChange("email", e.target.value)}
+            required
+          />
+        </label>
 
-      <input
-        placeholder="Company"
-        value={formData.company}
-        onChange={(e) => handleChange("company", e.target.value)}
-        required
-      />
+        <label className="ao-field">
+          <span className="ao-label">Company</span>
+          <input
+            className="ao-input"
+            placeholder="Company name"
+            value={formData.company}
+            onChange={(e) => handleChange("company", e.target.value)}
+            required
+          />
+        </label>
 
-      <input
-        type="tel"
-        placeholder="Phone (optional)"
-        value={formData.phone ?? ""}
-        onChange={(e) => handleChange("phone", e.target.value)}
-      />
+        <label className="ao-field">
+          <span className="ao-label">Phone (Optional)</span>
+          <input
+            className="ao-input"
+            type="tel"
+            placeholder="Phone number"
+            value={formData.phone ?? ""}
+            onChange={(e) => handleChange("phone", e.target.value)}
+          />
+        </label>
+      </div>
 
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? "Creating..." : "Create Client"}
-      </button>
+      <div style={{ marginTop: 24 }}>
+        <button className="ao-button" type="submit" disabled={isLoading}>
+          {isLoading ? "Creating..." : "+ Create Client"}
+        </button>
+      </div>
 
-      {isError && <p role="alert">Failed to create client.</p>}
+      {isError && (
+        <p className="ao-error" role="alert">
+          Failed to create client.
+        </p>
+      )}
     </form>
   );
 }

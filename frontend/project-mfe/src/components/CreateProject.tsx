@@ -1,9 +1,8 @@
 import { useForm } from "react-hook-form";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { projectSchema, type ProjectFormData } from "../schemas/projectSchema";
 
-function Createproject() {
+function CreateProject() {
   const {
     register,
     handleSubmit,
@@ -15,37 +14,58 @@ function Createproject() {
       status: "planned",
     },
   });
+
   const onSubmit = (data: ProjectFormData) => {
-    console.log("Project data : ", data);
+    console.log("Project data:", data);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="ao-card" onSubmit={handleSubmit(onSubmit)}>
       <h2>Create Project</h2>
 
-      <div>
-        <label htmlFor="project-name">Project Name</label>
-        <input
-          type="text"
-          id="project-name"
-          placeholder="Enter project name"
-          {...register("name")}
-        />
-        {errors.name && <p>{errors.name.message}</p>}
+      <div className="ao-form-grid">
+        <div className="ao-field">
+          <label className="ao-label" htmlFor="project-name">
+            Project Name
+          </label>
+
+          <input
+            className="ao-input"
+            type="text"
+            id="project-name"
+            placeholder="Enter project name"
+            {...register("name")}
+          />
+
+          {errors.name && <p className="ao-error">{errors.name.message}</p>}
+        </div>
+
+        <div className="ao-field">
+          <label className="ao-label" htmlFor="project-status">
+            Project Status
+          </label>
+
+          <select
+            className="ao-input"
+            id="project-status"
+            {...register("status")}
+          >
+            <option value="planned">Planned</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+
+          {errors.status && <p className="ao-error">{errors.status.message}</p>}
+        </div>
       </div>
 
-      <div>
-        <label htmlFor="project-status">Project Status</label>
-        <select id="project-status" {...register("status")}>
-          <option value="planned">Planned</option>
-          <option value="in-progress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
-        {errors.status && <p>{errors.status.message}</p>}
+      <div style={{ marginTop: 24 }}>
+        <button className="ao-button" type="submit">
+          + Create Project
+        </button>
       </div>
-      <button type="submit">Create Project</button>
     </form>
   );
 }
 
-export default Createproject;
+export default CreateProject;

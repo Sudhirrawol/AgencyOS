@@ -1,3 +1,4 @@
+import "../../shared/ui/agencyos.css";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import App from "./App";
