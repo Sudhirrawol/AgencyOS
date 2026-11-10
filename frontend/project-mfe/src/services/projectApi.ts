@@ -28,6 +28,11 @@ export interface CreateProjectRequest {
   clientId: string;
 }
 
+export interface UpdateProjectRequest {
+  id: string;
+  data: Partial<CreateProjectRequest>;
+}
+
 export const projectApi = createApi({
   reducerPath: "projectApi",
   baseQuery: fetchBaseQuery({
@@ -56,7 +61,44 @@ export const projectApi = createApi({
       }),
       invalidatesTags: ["Projects"],
     }),
+    updateProject: builder.mutation<
+      { message: string; project: Project },
+      UpdateProjectRequest
+    >({
+      query: ({ id, data }) => ({
+        url: `projects/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Projects"],
+    }),
+    getProjectClients: builder.query<
+      { message: string; userDetails: { _id: string; name: string }[] },
+      void
+    >({
+      queryFn: async (_arg, _api, _extraOptions, baseQuery) => {
+        const result = await baseQuery({
+          url: "http://localhost:3001/api/clients",
+        });
+
+        if (result.error) {
+          return { error: result.error };
+        }
+
+        return {
+          data: result.data as {
+            message: string;
+            userDetails: { _id: string; name: string }[];
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetProjectsQuery, useCreateProjectMutation } = projectApi;
+export const {
+  useGetProjectsQuery,
+  useCreateProjectMutation,
+  useUpdateProjectMutation,
+  useGetProjectClientsQuery,
+} = projectApi;

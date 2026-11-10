@@ -110,3 +110,18 @@ Learning progress tracker
 [ ] AI integration and RAG
 
 [ ] Production troubleshootin
+
+
+
+Phase	What we'll build	Status
+0. Foundation	Auth, Client CRUD foundation, Project Create/Edit/List	Core working
+1. Kafka	Project events, producer, consumer, retries, DLQ	Next
+2. WebSockets	Live project notifications, authenticated rooms	Pending
+3. Redis	Caching, rate limiting, distributed coordination	Pending
+4. Reliability	Idempotency, circuit breaker, timeouts, backoff	Pending
+5. Concurrency	Optimistic locking, atomic updates, transactions	Pending
+6. Security	JWT/RBAC hardening, service authorization, secrets	Pending
+7. Testing	Integration, contract, load, failure and recovery tests	Pending
+8. Containers	Docker Compose, NGINX, health checks	Pending
+9. AWS	VPC, IAM, ECR, ECS, ALB, S3, CloudFront	Pending
+10. Operations	CI/CD, CloudWatch, alerts, rollback, cost monitoring	Pending

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useGetProjectsQuery } from "./services/projectApi";
+import { useGetProjectsQuery, type Project } from "./services/projectApi";
 import Createproject from "./components/CreateProject";
+import EditProject from "./components/EditProject";
 
 const limit = 5;
 
@@ -10,6 +11,7 @@ function App() {
   const [sort, setSort] = useState("newest");
   const [debounceSearch, setDebounceSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
 
   const { data, isLoading, isFetching, isError, refetch } = useGetProjectsQuery(
     {
@@ -21,6 +23,7 @@ function App() {
     },
   );
 
+  // Debounce search to avoid unnecessary API requests
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebounceSearch(search);
@@ -44,6 +47,13 @@ function App() {
       </header>
 
       <Createproject />
+      {editingProject && (
+        <EditProject
+          key={editingProject._id}
+          project={editingProject}
+          onClose={() => setEditingProject(null)}
+        />
+      )}
 
       <section className="ao-card">
         <div className="ao-page-header">
@@ -130,18 +140,31 @@ function App() {
                     <tr>
                       <th>Project Name</th>
                       <th>Status</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
+
                   <tbody>
                     {projects.map((project) => (
                       <tr key={project._id}>
                         <td>{project.name}</td>
+
                         <td>
                           <span
                             className={`ao-status ao-status-${project.status}`}
                           >
                             {project.status.replace("-", " ")}
                           </span>
+                        </td>
+
+                        <td>
+                          <button
+                            className="ao-button ao-button-outline"
+                            type="button"
+                            onClick={() => setEditingProject(project)}
+                          >
+                            Edit
+                          </button>
                         </td>
                       </tr>
                     ))}
